@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { signOut } from './/auth/login/actions';
+
 
 const Home = () => {
   return (
@@ -21,9 +21,12 @@ const Home = () => {
         >
           Log in
         </Link>
-        <form>
-          <button formAction={signOut}>Sign Out</button>
-        </form>
+        <Link
+          href="/auth/sign-up"
+          className="text-center bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-900 transition"
+        >
+          Get Started
+        </Link>
       </div>
     </div>
   )

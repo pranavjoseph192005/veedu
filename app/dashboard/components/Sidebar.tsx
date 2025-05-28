@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signOut } from '@/app/auth/actions';
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -40,6 +41,16 @@ const Sidebar = () => {
         <Link href="/dashboard/Settings" className={linkClasses('/dashboard/Settings')}>
           Settings
         </Link>
+        <form action={signOut}>
+          <button
+            type="submit"
+            className="w-full text-center py-3 rounded-xl text-red-600 hover:bg-red-100 transition"
+          >
+            Sign Out
+          </button>
+        </form>
+
+
       </div>
 
       {/* Optional Footer */}

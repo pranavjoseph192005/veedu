@@ -1,48 +1,61 @@
-import { login, signup } from './actions';
+import { login } from '../actions';
+import Link from "next/link";
 
 export default function LoginPage() {
   return (
-    <form className="max-w-sm mx-auto mt-10 flex flex-col gap-4 p-4 border rounded-md shadow-sm">
-      <div className="flex flex-col">
-        <label htmlFor="email" className="text-sm font-medium mb-1">
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          className="border border-gray-300 rounded px-3 py-2"
-        />
-      </div>
+    <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <form
+        action={login}
+        className="w-full max-w-sm bg-white border border-gray-200 rounded-2xl shadow-xl p-6 space-y-6 animate-fade-in"
+      >
+        <div>
+          <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Don’t have an account?{" "}
+            <Link
+              href="/auth/sign-up"
+              className="text-blue-600 hover:underline font-medium"
+            >
+              Sign up
+            </Link>
+          </p>
+        </div>
 
-      <div className="flex flex-col">
-        <label htmlFor="password" className="text-sm font-medium mb-1">
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          className="border border-gray-300 rounded px-3 py-2"
-        />
-      </div>
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="email" className="text-sm font-medium text-gray-700 block mb-1">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
 
-      <div className="flex gap-2">
+          <div>
+            <label htmlFor="password" className="text-sm font-medium text-gray-700 block mb-1">
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+
         <button
-          formAction={login}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          type="submit"
+          className="w-full bg-blue-600 text-white font-semibold py-2.5 rounded-lg hover:bg-blue-700 transition focus:ring-2 focus:ring-blue-500 focus:outline-none"
         >
           Log in
         </button>
-        <button
-          formAction={signup}
-          className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
-        >
-          Sign up
-        </button>
-      </div>
-    </form>
+      </form>
+    </main>
   );
 }
