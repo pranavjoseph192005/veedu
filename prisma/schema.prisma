@@ -15,6 +15,7 @@ model User {
   firstName      String
   lastName       String
   createdAt DateTime @default(now())
+  houses Houses[]
 }
 
 model Houses {
@@ -22,4 +23,6 @@ model Houses {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   address String
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId Int
 }
