@@ -4,31 +4,15 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut } from '@/app/api/auth/signout';
-import { useUser } from "../UserContext"
-import { useEffect, useState } from 'react'
+import { UserContext } from "../UserContext"
+import { useContext } from 'react';
+
 
 const Sidebar = () => {
-  const user = useUser();
+  const { profile } = useContext(UserContext);
   const pathname = usePathname();
-  const [profile, setProfile] = useState<{
-    firstName: string;
-    lastName: string;
-    email: string;
-    uid: string;
-  } | null>(null);
   const isActive = (path: string) => pathname === path;
 
-  useEffect(() => {
-    if (!user) return;
-  
-    async function getUser() {
-      const res = await fetch(`/api/user?uid=${user?.uid}`);
-      const data = await res.json();
-      setProfile(data);
-    }
-  
-    getUser();
-  }, [user]);
 
   const linkClasses = (path: string) =>
     `w-full text-center py-3 rounded-xl transition-all duration-200 shadow-sm ${

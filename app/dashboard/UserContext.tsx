@@ -1,7 +1,15 @@
 // app/dashboard/UserContext.tsx
-'use client'
-import { createContext, useContext } from 'react'
+import { createContext } from 'react';
 
-export const UserContext = createContext<{ uid: string } | null>(null)
+interface UserProfile {
+  uid: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  // Add other fields from your `profile` object as needed
+}
 
-export const useUser = () => useContext(UserContext)
+export const UserContext = createContext<{ profile: UserProfile | null }>({
+  profile: null,
+});
+

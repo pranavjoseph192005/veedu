@@ -1,12 +1,26 @@
-// app/dashboard/UserProvider.tsx
 'use client'
 
 import { UserContext } from './UserContext';
 
-export function UserProvider({ uid, children }: { uid: string, children: React.ReactNode }) {
+interface UserProfile {
+  uid: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  // Match your backend `profile` fields
+}
+
+export function UserProvider({
+  profile,
+  children,
+}: {
+  profile: UserProfile;
+  children: React.ReactNode;
+}) {
   return (
-    <UserContext.Provider value={{ uid }}>
+    <UserContext.Provider value={{ profile }}>
       {children}
     </UserContext.Provider>
   );
 }
+

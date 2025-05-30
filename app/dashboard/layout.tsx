@@ -6,21 +6,32 @@ import { UserProvider } from './UserProvider';
 
 export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
-  const { data: { user }, error } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
 
   if (error || !user) {
     redirect('/auth/login');
   }
 
+  // Fetch user profile from your API
+  async function getUserProfile() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/user?uid=${user?.id}`, {
+      cache: 'no-store', // optional: avoid stale data in SSR
+    });
+    return res.json();
+  }
+
+  const profile = await getUserProfile();
+
   return (
-    <UserProvider uid={user.id!}>
+    <UserProvider profile={profile}>
       <div className="flex min-h-screen">
         <aside className="w-60 bg-gray-100 border-r border-gray-200">
           <Sidebar />
         </aside>
-        <main className="flex-1 p-4 bg-white">
-          {children}
-        </main>
+        <main className="flex-1 p-4 bg-white">{children}</main>
       </div>
     </UserProvider>
   );
