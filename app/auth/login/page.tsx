@@ -1,4 +1,4 @@
-import { login } from '../actions';
+import { login } from '@/app/api/auth/signin';
 import Link from "next/link";
 
 export default function LoginPage() {

@@ -1,4 +1,4 @@
-import { signup } from '../actions';
+import { signup } from '@/app/api/auth/signup';
 import Link from "next/link";
 
 export default function SignupPage() {

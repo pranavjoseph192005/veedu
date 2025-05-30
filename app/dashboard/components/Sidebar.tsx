@@ -3,11 +3,32 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { signOut } from '@/app/auth/actions';
+import { signOut } from '@/app/api/auth/signout';
+import { useUser } from "../UserContext"
+import { useEffect, useState } from 'react'
 
 const Sidebar = () => {
+  const user = useUser();
   const pathname = usePathname();
+  const [profile, setProfile] = useState<{
+    firstName: string;
+    lastName: string;
+    email: string;
+    uid: string;
+  } | null>(null);
   const isActive = (path: string) => pathname === path;
+
+  useEffect(() => {
+    if (!user) return;
+  
+    async function getUser() {
+      const res = await fetch(`/api/user?uid=${user?.uid}`);
+      const data = await res.json();
+      setProfile(data);
+    }
+  
+    getUser();
+  }, [user]);
 
   const linkClasses = (path: string) =>
     `w-full text-center py-3 rounded-xl transition-all duration-200 shadow-sm ${
@@ -19,8 +40,10 @@ const Sidebar = () => {
   return (
     <div className="min-h-screen w-60 bg-white border-r border-gray-200 py-6 px-4 flex flex-col justify-between items-center shadow-lg">
       {/* Top Section */}
-      <h1 className="text-2xl font-bold text-blue-600 mb-6">Veedu</h1>
-
+      <div className="grid grid-cols-2 gap-4">
+        <div className="text-2xl font-bold text-blue-600 mb-6">Veedu</div>
+        <div className="text-2xl font-bold text-blue-600 mb-6">{profile?.firstName}</div>
+      </div>
       {/* Nav Links - evenly spaced */}
       <div className="flex-1 w-full flex flex-col justify-evenly items-center gap-2">
         <Link href="/dashboard" className={linkClasses('/dashboard')}>
