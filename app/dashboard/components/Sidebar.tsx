@@ -26,7 +26,7 @@ const Sidebar = () => {
       {/* Top Section */}
       <div className="grid grid-cols-2 gap-4">
         <div className="text-2xl font-bold text-blue-600 mb-6">Veedu</div>
-        <div className="text-2xl font-bold text-blue-600 mb-6">{profile?.firstName}</div>
+        <div className="text-2xl font-bold text-blue-600 mb-6">{profile?.id}</div>
       </div>
       {/* Nav Links - evenly spaced */}
       <div className="flex-1 w-full flex flex-col justify-evenly items-center gap-2">
