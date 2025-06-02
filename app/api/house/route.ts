@@ -17,3 +17,21 @@ export async function Post(req: Request){
         return NextResponse.json({ error: 'Failed to create House' }, { status: 500 });
     }
 }
+
+export async function Get(req: Request){
+    try{
+        const {searchParams} = new URL(req.url);
+        const ownerId = Number(searchParams.get('ownerId'));
+
+        if(!ownerId){
+            return NextResponse.json({error: "user id is required"}, {status: 404});
+        }
+
+        const houses = await prisma.house.findMany({
+            where: {ownerId: ownerId}
+        })
+    } catch(error){
+        console.error('Error getting houses:', error);
+        return NextResponse.json({error: 'Failed to get houses'}, {status: 500});
+    }
+}
