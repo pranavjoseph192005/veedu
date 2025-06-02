@@ -30,6 +30,8 @@ export async function Get(req: Request){
         const houses = await prisma.house.findMany({
             where: {ownerId: ownerId}
         })
+
+        return NextResponse.json(houses, { status: 200 })
     } catch(error){
         console.error('Error getting houses:', error);
         return NextResponse.json({error: 'Failed to get houses'}, {status: 500});
