@@ -3,11 +3,14 @@ import { prisma } from '@/utils/prisma/prisma';
 
 export async function Post(req: Request){
     try{
-        const {address, ownerId} = await req.json();
+        const {address, city, state, zip, ownerId} = await req.json();
 
         const house = prisma.house.create({
             data:{
                 address,
+                city,
+                state,
+                zip,
                 ownerId
             }
         });
@@ -18,7 +21,7 @@ export async function Post(req: Request){
     }
 }
 
-export async function Get(req: Request){
+export async function GET(req: Request){
     try{
         const {searchParams} = new URL(req.url);
         const ownerId = Number(searchParams.get('ownerId'));
