@@ -2,12 +2,14 @@
 
 import React, { useEffect, useState, useContext } from 'react';
 import { UserContext } from "./UserContext";
+import { House } from '@prisma/client'; // auto-generated type
+import Link from 'next/link';
 
 const Dashboardpage = () => {
   const { profile } = useContext(UserContext);
   const ownerId = profile?.id;
 
-  const [houses, setHouses] = useState<any[]>([]);
+  const [houses, setHouses] = useState<House[]>([]);
 
   useEffect(() => {
     async function getHouses() {
@@ -25,7 +27,9 @@ const Dashboardpage = () => {
   return (
     <div className="grid grid-flow-col grid-rows-3 gap-4 p-6 bg-gray-50 min-h-screen">
       <div className="row-span-1 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
-        You have {houses.length} Properties
+        <Link href="/dashboard/Properties/Properties">
+          You have {houses.length} Properties
+        </Link>
       </div>
 
       <div className="row-start-1 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
