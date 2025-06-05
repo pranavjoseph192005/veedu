@@ -1,17 +1,13 @@
 // app/dashboard/layout.tsx
 import Sidebar from './components/Sidebar';
-import { createClient } from '@/utils/supabase/server';
+import getUser from '@/utils/supabase/get-user'
 import { redirect } from 'next/navigation';
 import { UserProvider } from './UserProvider';
 
 export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+  const user = await getUser();
 
-  if (error || !user) {
+  if (!user) {
     redirect('/auth/login');
   }
 

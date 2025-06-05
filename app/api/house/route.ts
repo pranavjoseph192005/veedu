@@ -27,7 +27,7 @@ export async function GET(req: Request){
         const ownerId = Number(searchParams.get('ownerId'));
 
         if(!ownerId){
-            return NextResponse.json({error: "user id is required"}, {status: 404});
+            return NextResponse.json({error: "owner id is required"}, {status: 404});
         }
 
         const houses = await prisma.house.findMany({

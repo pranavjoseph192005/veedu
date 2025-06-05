@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import FullPageTable from './Properties/page' // adjust path as needed
+import FullPageTable from './components/page' // adjust path as needed
 
 const DashboardPage = () => {
   return (
