@@ -9,7 +9,7 @@ const PropertiesDepthPage = async () => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-gray-800">Properties</h1>
         <Link
-          href="/dashboard"
+          href="/dashboard/Properties/AddProperty"
           className="inline-block bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-900 transition"
         >
           Add Property
