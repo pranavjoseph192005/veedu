@@ -1,25 +1,48 @@
+// app/api/house/route.ts
 import { NextResponse } from 'next/server';
 import { prisma } from '@/utils/prisma/prisma';
+import getUser from '@/utils/supabase/get-user';
 
-export async function Post(req: Request){
-    try{
-        const {address, city, state, zip, ownerId} = await req.json();
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
 
-        const house = prisma.house.create({
-            data:{
-                address,
-                city,
-                state,
-                zip,
-                ownerId
-            }
-        });
-        return NextResponse.json(house, { status: 201 });
-    } catch(error) {
-        console.error('Error creating House:', error);
-        return NextResponse.json({ error: 'Failed to create House' }, { status: 500 });
+    const user = await getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
     }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/user?uid=${user.id}`, {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      return NextResponse.json({ error: 'Failed to fetch user profile' }, { status: 400 });
+    }
+
+    const profile = await res.json();
+
+    const houseData = {
+      address: formData.get('address') as string,
+      city: formData.get('city') as string,
+      state: formData.get('state') as string,
+      zip: formData.get('zip') as string,
+      ownerId: profile?.id,
+    };
+
+    console.log(houseData);
+
+    const house = await prisma.house.create({
+      data: houseData,
+    });
+
+    return NextResponse.redirect(new URL('/dashboard/Properties/PropertiesDepth', req.url));
+  } catch (error) {
+    console.error('Error creating house:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
 }
+
 
 export async function GET(req: Request){
     try{
