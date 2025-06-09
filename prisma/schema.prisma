@@ -22,6 +22,11 @@ model User {
 model House {
   id        Int      @id @default(autoincrement())
   address   String   
+  city      String
+  state     String
+  zip       String
+  latitude  Float?
+  longitude Float?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)

@@ -3,6 +3,7 @@
 import { UserContext } from './UserContext';
 
 interface UserProfile {
+  id: number;
   uid: string;
   email: string;
   firstName: string;

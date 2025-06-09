@@ -1,33 +1,45 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
+import FullPageTable from './Properties/components/page';
 
-const Dashboardpage = () => {
+const Dashboardpage = async () => {
   return (
-    <div className="grid grid-flow-col grid-rows-3 gap-4 p-6 bg-gray-50 min-h-screen">
-      <div className="row-span-1 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
-        Properties
+    <div className="grid grid-cols-2 grid-rows-3 gap-4 p-6 bg-gray-50 min-h-screen">
+      
+      {/* Properties Preview */}
+      <div className="row-start-1 row-span-2 col-span-1 bg-white border border-gray-200 rounded-xl shadow-md p-4">
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="text-gray-700 font-semibold text-lg">Properties</h2>
+          <Link href="/dashboard/Properties/PropertiesDepth" className="text-sm text-blue-600 hover:underline">
+            View All
+          </Link>
+        </div>
+        <div className="overflow-auto max-h-[400px]">
+          <FullPageTable compact />
+        </div>
       </div>
 
-      <div className="row-start-1 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
+      {/* Tickets */}
+      <div className="row-start-1 col-start-2 col-span-1 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg">
         Tickets
       </div>
 
-      <div className="row-start-2 col-start-1 row-span-1 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
+      {/* Profit */}
+      <div className="row-start-2 col-span-1 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg">
         Profit
       </div>
 
-      <div className="row-start-2 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
-        Reminders 
+      {/* Reminders */}
+      <div className="row-start-3 col-span-1 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg">
+        Reminders
       </div>
 
-      <div className="row-start-3 col-start-1 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
+      {/* Analytics */}
+      <div className="row-start-3 col-span-1 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg">
         Analytics
-      </div>
-
-      <div className="row-start-3 col-span-2 bg-white border border-gray-200 rounded-xl shadow-md p-4 flex items-center justify-center text-gray-700 font-medium text-lg hover:text-blue-500 transition">
-        Performance 
       </div>
     </div>
   );
-}
+};
 
-export default Dashboardpage
+export default Dashboardpage;

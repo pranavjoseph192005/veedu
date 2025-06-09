@@ -1,4 +1,5 @@
 // app/dashboard/UserContext.tsx
+'use client';
 import { createContext } from 'react';
 
 interface UserProfile {
