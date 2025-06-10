@@ -17,6 +17,23 @@ model User {
   createdAt DateTime @default(now())
   houses    House[]
   tickets   Ticket[]
+  profile       UserProfile?
+}
+
+model UserProfile {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  user           User     @relation(fields: [userId], references: [id])
+
+  savings        Int?     // Amount saved for investing ($)
+  income         Int?     // Monthly income ($)
+  targetState    String?  // e.g. "Texas"
+  targetCity     String?  // e.g. "Austin"
+  goal           String?  // "cash flow", "appreciation", etc.
+  experience     String?  // "first-time", "own 1 rental", etc.
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model House {
