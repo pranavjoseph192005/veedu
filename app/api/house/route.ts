@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       city: formData.get('city') as string,
       state: formData.get('state') as string,
       zip: formData.get('zip') as string,
-      ownerId: profile?.id,
+      ownerId: profile?.ic,
     };
 
     console.log(houseData);
