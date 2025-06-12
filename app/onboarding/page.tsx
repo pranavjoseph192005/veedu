@@ -34,7 +34,7 @@ export default function OnboardingStart() {
         </motion.p>
 
         <motion.button
-          onClick={() => router.push('/onboarding/goal')}
+          onClick={() => router.push('/onboarding/experience')}
           className="bg-pink-600 hover:bg-pink-700 text-white text-lg px-6 py-3 rounded-full shadow-lg transition"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95, rotate: -3 }}

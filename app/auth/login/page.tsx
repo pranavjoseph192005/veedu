@@ -11,7 +11,7 @@ export default function LoginPage() {
         <div>
           <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
           <p className="text-sm text-gray-500 mt-1">
-            Don’t have an account?{" "}
+            Don't have an account?{" "}
             <Link
               href="/auth/sign-up"
               className="text-blue-600 hover:underline font-medium"
