@@ -1,9 +1,13 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default function IncomeSlider() {
   const router = useRouter()
+  const [experience, setExperience] = useState('')
+
+  const options = ['Never owned a rental', 'Own 1 rental', 'Own 2+ rentals', 'Manage rentals'];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -18,52 +22,35 @@ export default function IncomeSlider() {
       >
         <div className="text-center space-y-2">
             <h1 className="text-3xl font-extrabold text-gray-800 tracking-tight">
-                What's your financial profile?
+                What's your experience level?
             </h1>
             <p className="text-base text-gray-500 mb-0">
-                Tell us a bit about your financial situation
-            </p>
-            <p className="text-base text-gray-500 mt-0">
-                so we can better tailor your plan.
+                This helps us personalize your investing journey.
             </p>
         </div>
 
-        <div className="space-y-4">
-            <div>
-                <label htmlFor="savings" className="text-2xl font-medium text-gray-700 block mt-0">
-                    How much do you have saved to invest?
-                </label>
-                <p className="text-sm text-gray-500 py-1">
-                    Don't worry if you haven't saved any!
-                </p>
-                <input
-                    id="savings"
-                    name="savings"
-                    type="text"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-            </div>
-
-            <div>
-                <label htmlFor="income" className="text-2xl font-medium text-gray-700 block mt-0">
-                    Whats your annual income?
-                </label>
-                <input
-                    id="income"
-                    name="income"
-                    type="text"
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-            </div>
+        <div className="flex flex-col gap-4">
+        {options.map((option) => (
+                <button 
+                    key={option}
+                    type="button"
+                    onClick={() => setExperience(option)}
+                    className={`w-full px-4 py-3 rounded-lg border transition ${
+                        experience === option
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-white text-gray-700 border-gray-300 hover:border-gray-500'
+                    }`}
+                >
+                    {option} 
+                </button>
+            ))}
         </div>
 
         {/* You can insert the slider or form fields here */}
 
         <button
           type="submit"
-          className="w-full py-3 text-white font-medium bg-blue-600 rounded-xl hover:bg-blue-700 transition duration-200"
+          className="w-full py-3 text-white font-medium bg-gray-700 rounded-xl hover:bg-gray-800 transition duration-200"
         >
           Continue
         </button>

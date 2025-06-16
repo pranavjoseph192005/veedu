@@ -1,9 +1,13 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default function IncomeSlider() {
+  const [selectedOption, setSelection] = useState('');
   const router = useRouter()
+
+  const options = ['650 or less', '650-700', '700-750', '750-800'];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,13 +61,33 @@ export default function IncomeSlider() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
-        </div>
 
-        {/* You can insert the slider or form fields here */}
+            <div>
+                <label htmlFor="creditScore" className="text-2xl font-medium text-gray-700 block mt-0">
+                    What your credit score?
+                </label>
+                <div  className="flex flex-row gap-8 items-center">
+                    {options.map((option) => (
+                        <button 
+                            key={option}
+                            type="button"
+                            onClick={() => setSelection(option)}
+                            className={`px-4 py-3 rounded border space-x-4 ${
+                                selectedOption === option
+                                    ? 'bg-blue-600 text-white border-blue-600'
+                                    : 'bg-white text-gray-700 border-gray-300'
+                            }`}
+                        >
+                        {option} 
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
 
         <button
           type="submit"
-          className="w-full py-3 text-white font-medium bg-blue-600 rounded-xl hover:bg-blue-700 transition duration-200"
+          className="w-full py-3 text-white font-medium bg-gray-700 rounded-xl hover:bg-gray-800 transition duration-200"
         >
           Continue
         </button>
