@@ -31,7 +31,6 @@ export async function POST(req: Request) {
     const userProfile = await prisma.userProfile.create({
       data: {
         userId: user.id,
-        savings: 1000,
       },
     });
 

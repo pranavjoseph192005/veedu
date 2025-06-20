@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const OPTIONS = [
-  { id: 'investor', label: 'I want to invest' },
-  { id: 'manager', label: 'I already own property' },
-  { id: 'both', label: 'Both' },
+  { id: 'Living', label: 'Yes, this will be my primary living' },
+  { id: 'Investment', label: 'No, this is an investment property' },
+  { id: 'Neither', label: 'I\'m not sure yet' },
 ]
 
 export default function OnboardingTable() {
@@ -15,12 +15,11 @@ export default function OnboardingTable() {
 
   const handleSubmit = () => {
     if (!selectedId) return alert('Please select an option.')
-    console.log("The users goal is to" , selectedId)
-
-        /*await fetch('/api/user', {
+    console.log("The choice is ", selectedId)
+    /*await fetch('/api/user', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ choice: selectedId }),
+      body: JSON.stringify({ choice: selectedId}),
     })
     .then(response => {
         if (!response.ok) {
@@ -35,7 +34,6 @@ export default function OnboardingTable() {
         console.error('Error during PATCH:', error);
     });*/
 
-
     router.push('/onboarding/budget')
   }
 
@@ -46,10 +44,10 @@ export default function OnboardingTable() {
       >
         <div className="text-center space-y-2">
             <h1 className="text-4xl font-extrabold text-gray-800 tracking-tight">
-                What's your goal?
+                Would you like to live in this property?
             </h1>
             <p className="text-base text-gray-500 mb-0">
-                This helps us personalize your investing journey.
+                This affects financing, investment options, and search filters
             </p>
         </div>
         

@@ -11,7 +11,7 @@ export default function IncomeSlider() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    router.push('/onboarding/goal')
+    router.push('/onboarding/location')
   }
 
   return (
@@ -34,12 +34,9 @@ export default function IncomeSlider() {
 
         <div className="space-y-4">
             <div>
-                <label htmlFor="savings" className="text-2xl font-medium text-gray-700 block mt-0">
+                <label htmlFor="savings" className="block text-lg font-semibold text-gray-800 mb-2">
                     How much do you have saved to invest?
                 </label>
-                <p className="text-sm text-gray-500 py-1">
-                    Don't worry if you haven't saved any!
-                </p>
                 <input
                     id="savings"
                     name="savings"
@@ -50,7 +47,7 @@ export default function IncomeSlider() {
             </div>
 
             <div>
-                <label htmlFor="income" className="text-2xl font-medium text-gray-700 block mt-0">
+                <label htmlFor="income" className="block text-lg font-semibold text-gray-800 mb-2">
                     Whats your annual income?
                 </label>
                 <input
@@ -63,7 +60,7 @@ export default function IncomeSlider() {
             </div>
 
             <div>
-                <label htmlFor="creditScore" className="text-2xl font-medium text-gray-700 block mt-0">
+                <label htmlFor="creditScore" className="block text-lg font-semibold text-gray-800 mb-2">
                     What your credit score?
                 </label>
                 <div  className="flex flex-row gap-8 items-center">
