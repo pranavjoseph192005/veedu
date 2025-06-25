@@ -32,7 +32,9 @@ model UserProfile {
   targetCity     String?  // e.g. "Austin"
   goal           String?  // "cash flow", "appreciation", etc.
   experience     String?  // "first-time", "own 1 rental", etc.
-
+  creditScore    String?
+  living         String?
+  
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

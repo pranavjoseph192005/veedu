@@ -70,6 +70,7 @@ export async function GET(req: Request) {
 
 export async function PATCH(req: Request){
   try{
+    console.log("Patch called")
     const user = await getUser();
     const body = await req.json();
     const profile = await prisma.user.findUnique({
@@ -79,12 +80,12 @@ export async function PATCH(req: Request){
     });
     
     const profileId = profile?.id;
-    const updatedProfile = await prisma.userProfile.update({
+    const updatedUser = await prisma.user.update({
       where: { id: profileId },
       data: body, // applies only fields passed in body
     });
 
-    return NextResponse.json(updatedProfile);
+    return NextResponse.json(updatedUser);
   } catch(error) {
     console.error('PATCH error:', error);
     return NextResponse.json({ error: 'Failed to update' }, { status: 500 });

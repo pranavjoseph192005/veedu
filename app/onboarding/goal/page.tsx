@@ -10,17 +10,17 @@ const OPTIONS = [
 ]
 
 export default function OnboardingTable() {
-  const [selectedId, setSelectedId] = useState('')
+  const [goal, setGoal] = useState('')
   const router = useRouter()
 
-  const handleSubmit = () => {
-    if (!selectedId) return alert('Please select an option.')
-    console.log("The users goal is to" , selectedId)
+  const handleSubmit = async () => {
+    if (!goal) return alert('Please select an option.')
+    console.log("The users goal is to" , goal)
 
-        /*await fetch('/api/user', {
+    await fetch('/api/userProfile', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ choice: selectedId }),
+      body: JSON.stringify({ goal }),
     })
     .then(response => {
         if (!response.ok) {
@@ -33,7 +33,7 @@ export default function OnboardingTable() {
     })
     .catch(error => {
         console.error('Error during PATCH:', error);
-    });*/
+    });
 
 
     router.push('/onboarding/budget')
@@ -58,9 +58,9 @@ export default function OnboardingTable() {
             <button
               key={option.id}
               type="button"
-              onClick={() => setSelectedId(option.id)}
+              onClick={() => setGoal(option.id)}
               className={`w-full px-4 py-3 rounded-lg border transition ${
-                selectedId === option.id
+                goal === option.id
                     ? 'bg-blue-600 text-white border-blue-600'
                     : 'bg-white text-gray-700 border-gray-300 hover:border-gray-500'
             }`}

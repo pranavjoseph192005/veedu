@@ -4,13 +4,43 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export default function IncomeSlider() {
-  const [selectedOption, setSelection] = useState('');
+  const [creditScore, setSelection] = useState('');
+  const [savings, setSavings] = useState('');
+  const [income, setIncome] = useState('');
   const router = useRouter()
 
-  const options = ['650 or less', '650-700', '700-750', '750-800'];
+  const options = [
+    { id: '0', label: '650 or less' },
+    { id: '1', label: '650-700' },
+    { id: '2', label: '700-750' },
+    { id: '3', label:'750-800 ' },
+  ]
 
-  const handleSubmit = (e: React.FormEvent) => {
+  //const options = ['650 or less', '650-700', '700-750', '750-800'];
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    await fetch('/api/userProfile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            savings: parseInt(savings, 10),
+            income: parseInt(income, 10),
+            creditScore, // keep as string if it's a range like '700-750'
+          }),
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+      })
+      .then(data => {
+          console.log('Updated successfully:', data);
+      })
+      .catch(error => {
+          console.error('Error during PATCH:', error);
+      });
     router.push('/onboarding/location')
   }
 
@@ -42,6 +72,8 @@ export default function IncomeSlider() {
                     name="savings"
                     type="text"
                     required
+                    value={savings}
+                    onChange={(e) => setSavings(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
@@ -55,6 +87,8 @@ export default function IncomeSlider() {
                     name="income"
                     type="text"
                     required
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
@@ -66,16 +100,16 @@ export default function IncomeSlider() {
                 <div  className="flex flex-row gap-8 items-center">
                     {options.map((option) => (
                         <button 
-                            key={option}
+                            key={option.id}
                             type="button"
-                            onClick={() => setSelection(option)}
+                            onClick={() => setSelection(option.id)}
                             className={`px-4 py-3 rounded border space-x-4 ${
-                                selectedOption === option
+                                creditScore === option.id
                                     ? 'bg-blue-600 text-white border-blue-600'
                                     : 'bg-white text-gray-700 border-gray-300'
                             }`}
                         >
-                        {option} 
+                        {option.label} 
                         </button>
                     ))}
                 </div>

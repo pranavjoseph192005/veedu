@@ -9,17 +9,17 @@ const OPTIONS = [
   { id: 'Neither', label: 'I\'m not sure yet' },
 ]
 
-export default function OnboardingTable() {
-  const [selectedId, setSelectedId] = useState('')
+export default function Living() {
+  const [living, setLiving] = useState('')
   const router = useRouter()
 
-  const handleSubmit = () => {
-    if (!selectedId) return alert('Please select an option.')
-    console.log("The choice is ", selectedId)
-    /*await fetch('/api/user', {
+  const handleSubmit = async () => {
+    if (!living) return alert('Please select an option.')
+    console.log("The choice is ", living)
+    await fetch('/api/userProfile', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ choice: selectedId}),
+      body: JSON.stringify({ living }),
     })
     .then(response => {
         if (!response.ok) {
@@ -32,9 +32,9 @@ export default function OnboardingTable() {
     })
     .catch(error => {
         console.error('Error during PATCH:', error);
-    });*/
+    });
 
-    router.push('/onboarding/budget')
+    router.push('/onboarding/done')
   }
 
   return (
@@ -44,7 +44,7 @@ export default function OnboardingTable() {
       >
         <div className="text-center space-y-2">
             <h1 className="text-4xl font-extrabold text-gray-800 tracking-tight">
-                Would you like to live in this property?
+                Would you like to live in this property while renting?
             </h1>
             <p className="text-base text-gray-500 mb-0">
                 This affects financing, investment options, and search filters
@@ -56,9 +56,9 @@ export default function OnboardingTable() {
             <button
               key={option.id}
               type="button"
-              onClick={() => setSelectedId(option.id)}
+              onClick={() => setLiving(option.id)}
               className={`w-full px-4 py-3 rounded-lg border transition ${
-                selectedId === option.id
+                living === option.id
                     ? 'bg-blue-600 text-white border-blue-600'
                     : 'bg-white text-gray-700 border-gray-300 hover:border-gray-500'
             }`}

@@ -22,13 +22,13 @@ export default function IncomeSlider() {
   const router = useRouter()
   const [experience, setExperience] = useState('')
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (!experience) return alert('Please select an option.')
     console.log("The option is", experience)
-    /*await fetch('/api/user', {
+    await fetch('/api/userProfile', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ choice: experience }),
+      body: JSON.stringify({ experience }),
     })
     .then(response => {
         if (!response.ok) {
@@ -41,7 +41,7 @@ export default function IncomeSlider() {
     })
     .catch(error => {
         console.error('Error during PATCH:', error);
-    });*/
+    });
 
     router.push('/onboarding/goal')
   }
