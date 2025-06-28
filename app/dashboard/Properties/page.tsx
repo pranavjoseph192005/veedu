@@ -11,8 +11,7 @@ const DashboardPage = () => {
           <Link href="/dashboard/Properties/PropertiesDepth" className="text-sm text-blue-600 hover:underline">
             View All
           </Link>
-        </div>
-        <h2 className="text-lg font-semibold mb-2">Properties</h2>
+        </div>       
         <FullPageTable compact />
       </div>
 

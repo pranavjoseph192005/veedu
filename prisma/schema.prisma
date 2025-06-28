@@ -28,6 +28,7 @@ model UserProfile {
 
   savings        Int?     // Amount saved for investing ($)
   income         Int?     // Monthly income ($)
+  monthlyDebts   Int?
   targetState    String?  // e.g. "Texas"
   targetCity     String?  // e.g. "Austin"
   goal           String?  // "cash flow", "appreciation", etc.

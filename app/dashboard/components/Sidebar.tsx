@@ -30,11 +30,11 @@ const Sidebar = () => {
       </div>
       {/* Nav Links - evenly spaced */}
       <div className="flex-1 w-full flex flex-col justify-evenly items-center gap-2">
-        <Link href="/dashboard" className={linkClasses('/dashboard')}>
-          Dashboard
-        </Link>
         <Link href="/dashboard/Starter" className={linkClasses('/dashboard/Starter')}>
           Get Started
+        </Link>
+        <Link href="/dashboard" className={linkClasses('/dashboard')}>
+          Dashboard
         </Link>
         <Link href="/dashboard/Properties" className={linkClasses('/dashboard/Properties')}>
           Properties
