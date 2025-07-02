@@ -1,0 +1,22 @@
+{
+  "node": {
+    "00b676dbd5c21218c8e62497e414a193c41cec890e": {
+      "workers": {
+        "app/dashboard/Properties/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpranav%2Fveedu%2Ffrontend%2Fapp%2Fapi%2Fauth%2Fsignout.ts%22%2C%5B%7B%22id%22%3A%2200b676dbd5c21218c8e62497e414a193c41cec890e%22%2C%22exportedName%22%3A%22signOut%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/dashboard/Starter/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpranav%2Fveedu%2Ffrontend%2Fapp%2Fapi%2Fauth%2Fsignout.ts%22%2C%5B%7B%22id%22%3A%2200b676dbd5c21218c8e62497e414a193c41cec890e%22%2C%22exportedName%22%3A%22signOut%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/Properties/page": "action-browser",
+        "app/dashboard/Starter/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "DBGZRiakEaL+GXn9Uby8uZonLDeKErGIK0YK1asxWHM="
+}
