@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+
 export default function IncomeSlider() {
   const [creditScore, setSelection] = useState('');
   const [savings, setSavings] = useState('');
@@ -43,6 +44,19 @@ export default function IncomeSlider() {
       .catch(error => {
           console.error('Error during PATCH:', error);
       });
+    const res = await fetch('http://127.0.0.1:8000/api/calculate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            annual_income: parseInt(income, 10),
+            monthly_debt: parseInt(monthlyDebts, 10),
+            down_payment: parseInt(savings, 10),
+        }),
+    })
+
+    console.log(res.body)
     router.push('/onboarding/location')
   }
 

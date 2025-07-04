@@ -12,6 +12,7 @@ class EstimateRequest(BaseModel):
 
 class EstimateResponse(BaseModel):
     estimatedLoanLow: float
+    meanLoan: float
     estimatedLoanHigh: float
     monthlyPayment: float
     note: str
