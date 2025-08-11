@@ -21,7 +21,7 @@ const FullPageTable = async ({ compact = false }: { compact?: boolean }) => {
   async function getHouses() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/house?ownerId=${profile?.id}`, {
       cache: 'no-store',
-    });
+  });
   
     const data = await res.json();
   

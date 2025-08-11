@@ -3,6 +3,7 @@
 from pydantic import BaseModel
 
 class EstimateRequest(BaseModel):
+    uid: int
     annual_income: float
     monthly_debt: float
     down_payment: float

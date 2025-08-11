@@ -45,9 +45,9 @@ def estimate_loan_range(
     estimated_loan_high = loan_amount * 1.1
 
     return {
-        "estimatedLoanLow": round(estimated_loan_low),
-        "meanLoan": round(loan_amount),
-        "estimatedLoanHigh": round(estimated_loan_high),
-        "monthlyPayment": round(monthly_budget),
+        "estimatedLoanLow": round(estimated_loan_low, -4),
+        "meanLoan": round(loan_amount, -4),
+        "estimatedLoanHigh": round(estimated_loan_high, -4),
+        "monthlyPayment": round(monthly_budget, -4),
         "note": "This is an estimate only. Actual loan eligibility may vary."
     }
