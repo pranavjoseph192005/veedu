@@ -3,10 +3,14 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export default function IncomeSlider() {
+
+
+export default function UserBudget() {
+
   const [creditScore, setSelection] = useState('');
   const [savings, setSavings] = useState('');
   const [income, setIncome] = useState('');
+  const [monthlyDebts, setDebts] = useState('');
   const router = useRouter()
 
   const options = [
@@ -26,6 +30,7 @@ export default function IncomeSlider() {
         body: JSON.stringify({
             savings: parseInt(savings, 10),
             income: parseInt(income, 10),
+            monthlyDebts: parseInt(monthlyDebts, 10),
             creditScore, // keep as string if it's a range like '700-750'
           }),
       })
@@ -89,6 +94,21 @@ export default function IncomeSlider() {
                     required
                     value={income}
                     onChange={(e) => setIncome(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </div>
+
+            <div>
+                <label htmlFor="debts" className="block text-lg font-semibold text-gray-800 mb-2">
+                    What is your total monthly debts?
+                </label>
+                <input
+                    id="debts"
+                    name="debts"
+                    type="text"
+                    required
+                    value={monthlyDebts}
+                    onChange={(e) => setDebts(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>

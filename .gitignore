@@ -1,7 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
 /node_modules
+frontend/node_modules/@prisma/
+backend/prisma-client/
+# dependencies
+frontend/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -13,8 +16,13 @@
 # testing
 /coverage
 
+<<<<<<< HEAD
 # next.js
 /.next/
+=======
+# Next.js build output
+.next/
+>>>>>>> 5d2922a (done with backend and frontend seperation)
 /out/
 
 # production
@@ -39,3 +47,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+node_modules
+backend/app/__pycache__/
