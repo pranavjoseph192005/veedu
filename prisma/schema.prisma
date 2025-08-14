@@ -43,10 +43,6 @@ model UserProfile {
   lowLoanAmount  Int?
   meanLoanAmount Int?
   highLoanAmount Int?
-<<<<<<< HEAD
-=======
-  
->>>>>>> b778ca2 (Connected backend mortgage calculation to frontend)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
