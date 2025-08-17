@@ -24,10 +24,10 @@ export default async function ProtectedLayout({ children }: { children: React.Re
   return (
     <UserProvider profile={profile}>
       <div className="flex min-h-screen">
-        <aside className="w-60 bg-gray-100 border-r border-gray-200">
+        <aside className="fixed left-0 top-0 w-60 h-full bg-gray-100 border-r border-gray-200 z-40">
           <Sidebar />
         </aside>
-        <main className="flex-1 p-4 bg-white">{children}</main>
+        <main className="flex-1 ml-60 p-4 bg-white">{children}</main>
       </div>
     </UserProvider>
   );
