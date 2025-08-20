@@ -21,19 +21,28 @@ export async function POST(req: Request) {
     }
 
     const profile = await res.json();
-
-    const houseData = {
-      address: formData.get('address') as string,
-      city: formData.get('city') as string,
-      state: formData.get('state') as string,
-      zip: formData.get('zip') as string,
-      ownerId: profile?.ic,
-    };
-
-    console.log(houseData);
+    
+    const existingHouse = await prisma.house.findFirst({
+      where: {
+        address: formData.get('address') as string,
+        city: formData.get('city') as string,
+        state: formData.get('state') as string,
+        zip: formData.get('zip') as string
+      }
+    });
+    
+    if (existingHouse) {
+      throw new Error('House already exists');
+    }
 
     const house = await prisma.house.create({
-      data: houseData,
+      data: {
+        address: formData.get('address') as string,
+        city: formData.get('city') as string,
+        state: formData.get('state') as string,
+        zip: formData.get('zip') as string,
+        ownerId: profile?.id,
+      },
     });
 
     return NextResponse.redirect(new URL('/dashboard/Properties/PropertiesDepth', req.url));
