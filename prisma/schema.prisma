@@ -29,7 +29,7 @@ model User {
 model UserProfile {
   id             Int      @id @default(autoincrement())
   userId         Int      @unique
-  user           User     @relation(fields: [userId], references: [id])
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   savings        Int?     // Amount saved for investing ($)
   income         Int?     // Monthly income ($)
@@ -53,8 +53,7 @@ model House {
   city      String
   state     String
   zip       String
-  latitude  Float?
-  longitude Float?
+  @@unique([address, city, state, zip]) // Combination must be unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
