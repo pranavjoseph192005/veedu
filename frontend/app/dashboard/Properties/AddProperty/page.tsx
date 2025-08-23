@@ -3,6 +3,14 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+
+const OPTIONS = [
+  { id: 'Single Family Property', label: 'Yes, this will be my primary living' },
+  { id: 'Multi-Family Property', label: 'No, this is an investment property' },
+  { id: 'Commercial Property', label: 'I\'m not sure yet' },
+  { id: 'Other', label: 'Other' },
+]
+
 export default function PropertyForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
@@ -37,6 +45,18 @@ export default function PropertyForm() {
         </div>
 
         <div className="space-y-4">
+
+          <div>
+            <label htmlFor="propertyType" className="text-sm font-medium text-gray-700 block mb-1">
+              Property Type
+            </label>
+            <select name="propertyType" id="propertyType">
+              <option value="single-family">Single Family Home</option>
+              <option value="townhouse">Townhouse</option>
+              <option value="condo">Condominium</option>
+              <option value="duplex">Duplex</option>
+            </select>
+          </div>
           <div>
             <label htmlFor="address" className="text-sm font-medium text-gray-700 block mb-1">
               Street
