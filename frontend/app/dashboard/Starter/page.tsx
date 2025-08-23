@@ -141,7 +141,7 @@ const DashboardPage = () => {
               href="/dashboard/Properties"
               className="mt-6 bg-blue-600 hover:bg-blue-700 text-white text-base font-medium py-2 px-4 rounded-lg text-center transition"
             >
-              Find My
+              Find My Market
             </Link>
           </div>
         </div>
