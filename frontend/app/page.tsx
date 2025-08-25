@@ -10,12 +10,6 @@ const Home = () => {
       <h1 className="text-3xl font-bold mb-8">Welcome</h1>
       <div className="flex flex-col gap-4 w-full max-w-xs">
         <Link
-          href="/dashboard"
-          className="text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-        >
-          Dashboard
-        </Link>
-        <Link
           href="/auth/login"
           className="text-center bg-gray-800 text-white py-2 rounded-lg hover:bg-gray-900 transition"
         >

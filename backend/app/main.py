@@ -2,22 +2,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .calculate import estimate_loan_range
 from .models import EstimateRequest, EstimateResponse
-from .db import db
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
+import requests 
+import os
 
 load_dotenv()
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await db.connect()
-    yield
-    await db.disconnect()
 
 app = FastAPI(
     title="Loan Estimate API",
     version="1.0",
-    lifespan=lifespan
 )
 
 # CORS settings so Next.js can call it locally or in production
@@ -45,15 +39,15 @@ async def calculate_estimate(request: EstimateRequest):
         loan_term_years=request.loan_term_years,
         taxes_insurance_monthly=request.taxes_insurance_monthly
     )
-    #print(request.uid)
-    await db.userprofile.update(
-        where={
-            "userId": request.uid  # must be an integer
+    patch_response = requests.patch(
+        'http://localhost:3000/api/userProfile/server-update',
+        json={
+            'uid': request.uid,  # The user ID you want to update
+            'lowLoanAmount': result["estimatedLoanLow"],
+            'meanLoanAmount': result["meanLoan"],
+            'highLoanAmount': result["estimatedLoanHigh"]
         },
-        data={
-            "lowLoanAmount": result["estimatedLoanLow"],
-            "meanLoanAmount": result["meanLoan"],
-            "highLoanAmount": result["estimatedLoanHigh"]
-        }
+        headers={'x-api-key': os.getenv('SERVER_API_KEY')}
     )
+
     return result
