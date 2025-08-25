@@ -9,7 +9,7 @@ export default function OnboardingComplete() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('/api/userProfile', {
+      const response = await fetch('/api/user', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ firstLoginComplete: true }),
@@ -22,7 +22,7 @@ export default function OnboardingComplete() {
       const data = await response.json()
       console.log('Updated successfully:', data)
 
-      router.push('/dashboard')
+      router.push('/dashboard/Starter')
     } catch (error) {
       console.error('Error during PATCH:', error)
     }
@@ -55,7 +55,7 @@ export default function OnboardingComplete() {
         </motion.p>
 
         <motion.button
-          onClick={() => handleSubmit}
+          onClick={() => handleSubmit()}
           className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-6 py-3 rounded-lg shadow-lg transition focus:ring-2 focus:ring-blue-500 focus:outline-none"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
