@@ -27,7 +27,7 @@ export default function PropertyForm() {
     })
 
     if (res.ok) {
-      router.push('/dashboard/Properties/PropertiesDepth')
+      router.push('/dashboard/Properties/AddProperty/info')
     } else {
       alert('Failed to add property')
       setIsSubmitting(false)
@@ -35,12 +35,12 @@ export default function PropertyForm() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 px-4 py-8">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-50 rounded-3xl px-8 py-8">
       <div className="w-full max-w-3xl">
         {/* Header Section */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Add Your Property</h1>
-          <p className="text-lg text-gray-600 max-w-md mx-auto">
+          <p className=" text-gray-600 max-w-md mx-auto">
             Tell us about your property so we can help you manage it effectively.
           </p>
         </div>

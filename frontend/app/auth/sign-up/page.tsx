@@ -6,7 +6,7 @@ export default function SignupPage() {
     <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <form
         action={signup}
-        className="w-full max-w-sm bg-white border border-gray-200 rounded-2xl shadow-xl p-6 space-y-6 animate-fade-in"
+        className="w-full max-w-xl bg-white border border-gray-200 rounded-2xl shadow-xl p-6 space-y-6 animate-fade-in"
       >
         <div>
           <h1 className="text-3xl font-bold text-gray-800">Create an Account</h1>
