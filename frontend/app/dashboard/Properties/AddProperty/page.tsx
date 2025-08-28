@@ -25,9 +25,10 @@ export default function PropertyForm() {
       method: 'POST',
       body: formData,
     })
-
     if (res.ok) {
-      router.push('/dashboard/Properties/AddProperty/info')
+      const data = await res.json()
+      const propertyId = data.id // Assuming your API returns the house object with ID
+      router.push(`/dashboard/Properties/AddProperty/info/${propertyId}`)
     } else {
       alert('Failed to add property')
       setIsSubmitting(false)
@@ -158,10 +159,7 @@ export default function PropertyForm() {
                     </>
                   ) : (
                     <>
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                      </svg>
-                      Add Property
+                      Next
                     </>
                   )}
                 </button>

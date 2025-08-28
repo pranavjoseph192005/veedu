@@ -6,7 +6,6 @@ const keywords = ["savings", "income", "monthlyDebts", "creditScore"];
 
 export async function PATCH(req: Request){
     try{
-      console.log("Patch called")
       const user = await getUser();
       const body = await req.json();
       const profile = await prisma.user.findUnique({
