@@ -2,41 +2,30 @@ import React from 'react';
 import Link from 'next/link';
 import { House } from '@prisma/client';
 import { House as HouseIcon, Plus } from 'lucide-react';
+import { prisma } from '@/utils/prisma/prisma';
 import getUser from '@/utils/supabase/get-user';
-import { redirect } from 'next/navigation';
 
 const columns = ['ID', 'Address', 'City', 'State', 'Zip'];
 
 const FullPageTable = async ({ compact = false }: { compact?: boolean }) => {
   const user = await getUser();
-
   if (!user) {
-    redirect('/auth/login');
+    return <div>Please log in to view properties</div>;
   }
 
-  // Fetch user profile from your API
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/user?uid=${user?.id}`, {
-    cache: 'no-store',
+  // Get the user profile with numerical ID
+  const profile = await prisma.user.findUnique({
+    where: { uid: user.id }
   });
-  const profile = await res.json();  
 
-  async function getHouses() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/house?ownerId=${profile?.id}`, {
-      cache: 'no-store',
-    });
-  
-    const data = await res.json();
-  
-    // Log or validate
-    if (!Array.isArray(data)) {
-      console.error("Expected array, got:", data);
-      return [];
-    }
-  
-    return data;
+  if (!profile) {
+    return <div>User profile not found</div>;
   }
 
-  const houses: House[] = await getHouses();
+  // Get houses using the numerical ID
+  const houses: House[] = await prisma.house.findMany({
+    where: { ownerId: profile.id }
+  });
 
   // Empty state when no houses
   if (houses.length === 0) {
@@ -82,11 +71,21 @@ const FullPageTable = async ({ compact = false }: { compact?: boolean }) => {
                 key={row.id}
                 className={`transition ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-gray-100`}
               >
-                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">{row.id}</td>
-                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">{row.address}</td>
-                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">{row.city}</td>
-                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">{row.state}</td>
-                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">{row.zip}</td>
+                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">
+                  <Link href={`/dashboard/Properties/PropertyInfo/${row.id}`}> {i+1} </Link>
+                </td>
+                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">
+                  <Link href={`/dashboard/Properties/PropertyInfo/${row.id}`}> {row.address} </Link>
+                </td>
+                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">
+                  <Link href={`/dashboard/Properties/PropertyInfo/${row.id}`}> {row.city} </Link>
+                </td>
+                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">
+                  <Link href={`/dashboard/Properties/PropertyInfo/${row.id}`}> {row.state} </Link>
+                </td>
+                <td className="px-4 py-3 text-gray-800 truncate max-w-[200px]">
+                  <Link href={`/dashboard/Properties/PropertyInfo/${row.id}`}> {row.zip} </Link>
+                </td>
               </tr>
             ))}
           </tbody>

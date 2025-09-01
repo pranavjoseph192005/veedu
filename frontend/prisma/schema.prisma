@@ -50,6 +50,10 @@ model House {
   @@unique([address, city, state, zip]) // Combination must be unique
   propertyType String?
   purchasePrice Int?
+  purchaseDate DateTime?
+  bedrooms Int?
+  bathrooms Int?
+  squareFeet Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
