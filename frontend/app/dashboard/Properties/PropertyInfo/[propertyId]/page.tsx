@@ -1,12 +1,80 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { House } from '@prisma/client'
 import { ArrowLeft, Edit3, Camera, MapPin, Home, Calendar, DollarSign, User, Phone, Mail, Settings, Trash2, Plus } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-export default function PropertyInfo() {
+interface PropertyInfoPageProps {
+  params: {propertyId: string};
+}
+
+export default function PropertyInfo({ params }: PropertyInfoPageProps) {
+  const [house, setHouse] = useState<House | null>(null)
   const [activeTab, setActiveTab] = useState('overview')
   const [isEditing, setIsEditing] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter()
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadPropertydata = async () => {
+      try{
+        const { propertyId } = await params;
+        console.log('Loading property data for ID:', propertyId);
+
+        if (!propertyId || propertyId === 'undefined' || propertyId === undefined) {
+          console.error('Invalid ID in PropertyInfo:', propertyId);
+          setError('Invalid property ID');
+          return;
+        }
+
+        const cachedData = sessionStorage.getItem(`property_${propertyId}`);
+        if(cachedData){
+          const parsedData = JSON.parse(cachedData);
+          
+          if(isMounted){
+            setHouse(parsedData);
+          }
+          sessionStorage.removeItem(`property_${propertyId}`);
+          return;
+        }
+        console.log('No cached data, fetching from API for ID:', propertyId);
+        const response = await fetch(`/api/house/${propertyId}/full`);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('API Error:', response.status, errorText);
+          
+          if (!isMounted) return;
+          if (response.status === 404) {
+            setError('Property not found');
+          } else if (response.status === 401) {
+            setError('Unauthorized access');
+          } else {
+            setError('Failed to load property information');
+          }
+          return;
+        }
+        const propertyData = await response.json();
+        if(isMounted){
+          setHouse(propertyData);
+        }
+      } catch(err){
+        console.error('Error loading property data:', err);
+        setError('Failed to load property information. Please try again.');
+      } finally {
+        setLoading(false);
+        console.log('Property data loaded successfully', house);
+      }
+    };
+    loadPropertydata();
+    return () => {
+      isMounted = false;
+    };
+  }, [params]);
 
   // Mock property data - replace with real data from your API
   const propertyData = {
@@ -43,8 +111,23 @@ export default function PropertyInfo() {
     { id: 'settings', label: 'Settings', icon: Settings }
   ]
 
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 p-6 rounded-3xl">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading property information...</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 p-6 roundedf">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 p-6 rounded-3xl">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -53,7 +136,7 @@ export default function PropertyInfo() {
               <ArrowLeft className="w-5 h-5 text-gray-600" />
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">{propertyData.address}</h1>
+              <h1 className="text-3xl font-bold text-gray-900">{house?.address}</h1>
               <p className="text-gray-600 flex items-center gap-1 mt-1">
                 <MapPin className="w-4 h-4" />
                 {propertyData.city}, {propertyData.state} {propertyData.zip}

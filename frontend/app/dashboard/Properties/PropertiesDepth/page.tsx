@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import FullPageTable from '../components/page';
+import FullPageTable from '../components/FullPageTable';
 
 const PropertiesDepthPage = async () => {
   return (

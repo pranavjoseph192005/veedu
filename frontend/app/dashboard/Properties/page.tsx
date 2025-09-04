@@ -1,5 +1,5 @@
 import React from 'react';
-import FullPageTable from './components/page' // adjust path as needed
+import FullPageTable from './components/FullPageTable' // adjust path as needed
 import Link from 'next/link'
 
 const PropertiesPage = async () => {

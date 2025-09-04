@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import FullPageTable from './Properties/components/page';
+import FullPageTable from './Properties/components/FullPageTable';
 
 const Dashboardpage = async () => {
   return (
