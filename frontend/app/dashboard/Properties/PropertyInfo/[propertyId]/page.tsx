@@ -78,17 +78,6 @@ export default function PropertyInfo({ params }: PropertyInfoPageProps) {
 
   // Mock property data - replace with real data from your API
   const propertyData = {
-    id: 1,
-    address: '123 Oak Street',
-    city: 'Dallas',
-    state: 'TX',
-    zip: '75201',
-    propertyType: 'Single Family Home',
-    bedrooms: 3,
-    bathrooms: 2,
-    squareFeet: 1850,
-    purchasePrice: 285000,
-    purchaseDate: '2024-03-15',
     currentRent: 2200,
     tenant: {
       name: 'John & Sarah Williams',
@@ -139,7 +128,7 @@ export default function PropertyInfo({ params }: PropertyInfoPageProps) {
               <h1 className="text-3xl font-bold text-gray-900">{house?.address}</h1>
               <p className="text-gray-600 flex items-center gap-1 mt-1">
                 <MapPin className="w-4 h-4" />
-                {propertyData.city}, {propertyData.state} {propertyData.zip}
+                {house?.city}, {house?.state} {house?.zip}
               </p>
             </div>
           </div>
@@ -189,19 +178,19 @@ export default function PropertyInfo({ params }: PropertyInfoPageProps) {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm text-gray-500">Property Type</label>
-                        <p className="font-medium text-gray-900">{propertyData.propertyType}</p>
+                        <p className="font-medium text-gray-900">{house?.propertyType}</p>
                       </div>
                       <div>
                         <label className="text-sm text-gray-500">Square Feet</label>
-                        <p className="font-medium text-gray-900">{propertyData.squareFeet.toLocaleString()} sq ft</p>
+                        <p className="font-medium text-gray-900">{house?.squareFeet?.toLocaleString()} sq ft</p>
                       </div>
                       <div>
                         <label className="text-sm text-gray-500">Bedrooms</label>
-                        <p className="font-medium text-gray-900">{propertyData.bedrooms}</p>
+                        <p className="font-medium text-gray-900">{house?.bedrooms}</p>
                       </div>
                       <div>
                         <label className="text-sm text-gray-500">Bathrooms</label>
-                        <p className="font-medium text-gray-900">{propertyData.bathrooms}</p>
+                        <p className="font-medium text-gray-900">{house?.bathrooms}</p>
                       </div>
                     </div>
                   </div>
@@ -211,7 +200,7 @@ export default function PropertyInfo({ params }: PropertyInfoPageProps) {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm text-gray-500">Purchase Price</label>
-                        <p className="font-medium text-gray-900">${propertyData.purchasePrice.toLocaleString()}</p>
+                        <p className="font-medium text-gray-900">${house?.purchasePrice?.toLocaleString()}</p>
                       </div>
                       <div>
                         <label className="text-sm text-gray-500">Current Rent</label>
@@ -219,7 +208,7 @@ export default function PropertyInfo({ params }: PropertyInfoPageProps) {
                       </div>
                       <div>
                         <label className="text-sm text-gray-500">Purchase Date</label>
-                        <p className="font-medium text-gray-900">{new Date(propertyData.purchaseDate).toLocaleDateString()}</p>
+                        <p className="font-medium text-gray-900">{new Date(house?.purchaseDate!).toLocaleDateString()}</p>
                       </div>
                       <div>
                         <label className="text-sm text-gray-500">Monthly ROI</label>
