@@ -59,6 +59,7 @@ model House {
   owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId   Int
   tickets   Ticket[]
+  tenants   Tenant[]
 }
 
 model Ticket {
@@ -70,5 +71,19 @@ model Ticket {
   ownerId   Int
   house     House    @relation(fields: [houseId], references: [id], onDelete: Cascade)
   houseId   Int
+}
+
+model Tenant {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String 
+  house     House    @relation(fields: [houseId], references: [id], onDelete: Cascade)
+  houseId   Int
+  leaseStart DateTime
+  leaseEnd DateTime
+  monthlyRent Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
